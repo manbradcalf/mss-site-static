@@ -1,3 +1,60 @@
+// Analytics Event Tracking
+function trackEvent(eventName, parameters = {}) {
+    // Google Analytics 4
+    if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, parameters);
+    }
+    
+    // Microsoft Clarity
+    if (typeof clarity !== 'undefined') {
+        clarity('event', eventName);
+    }
+    
+    // Azure Application Insights
+    if (typeof appInsights !== 'undefined') {
+        appInsights.trackEvent({
+            name: eventName,
+            properties: {
+                ...parameters,
+                timestamp: new Date().toISOString(),
+                page: window.location.pathname
+            }
+        });
+    }
+    
+    // Console log for debugging
+    console.log('Analytics Event:', eventName, parameters);
+}
+
+// Track page sections viewed
+function trackSectionView(sectionName) {
+    trackEvent('section_view', {
+        section_name: sectionName,
+        page_title: document.title
+    });
+}
+
+// Enhanced Intersection Observer for section tracking
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const sectionId = entry.target.id || entry.target.className;
+            trackSectionView(sectionId);
+        }
+    });
+}, {
+    threshold: 0.5,
+    rootMargin: '0px 0px -100px 0px'
+});
+
+// Track sections when they come into view
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+});
+
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -5,12 +62,23 @@ const navMenu = document.querySelector('.nav-menu');
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
+    
+    // Track mobile menu usage
+    trackEvent('mobile_menu_toggle', {
+        action: navMenu.classList.contains('active') ? 'open' : 'close'
+    });
 });
 
 // Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', (e) => {
     hamburger.classList.remove('active');
     navMenu.classList.remove('active');
+    
+    // Track navigation clicks
+    trackEvent('navigation_click', {
+        link_text: e.target.textContent,
+        link_url: e.target.getAttribute('href')
+    });
 }));
 
 // Smooth scrolling for navigation links
@@ -23,7 +91,27 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth',
                 block: 'start'
             });
+            
+            // Track internal link clicks
+            trackEvent('internal_link_click', {
+                target_section: this.getAttribute('href'),
+                source_text: this.textContent
+            });
         }
+    });
+});
+
+// Track CTA button clicks
+document.addEventListener('DOMContentLoaded', () => {
+    const ctaButtons = document.querySelectorAll('.btn');
+    ctaButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            trackEvent('cta_click', {
+                button_text: e.target.textContent,
+                button_class: e.target.className,
+                button_location: e.target.closest('section')?.id || 'unknown'
+            });
+        });
     });
 });
 
@@ -66,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Contact form handling
+// Contact form handling with enhanced tracking
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
@@ -76,14 +164,26 @@ if (contactForm) {
         const formData = new FormData(this);
         const data = Object.fromEntries(formData);
         
+        // Track form submission attempt
+        trackEvent('form_submission_attempt', {
+            service_selected: data.service || 'none',
+            has_company: !!data.company
+        });
+        
         // Simple validation
         if (!data.name || !data.email || !data.message) {
             showNotification('Please fill in all required fields.', 'error');
+            trackEvent('form_validation_error', {
+                error_type: 'missing_required_fields'
+            });
             return;
         }
         
         if (!isValidEmail(data.email)) {
             showNotification('Please enter a valid email address.', 'error');
+            trackEvent('form_validation_error', {
+                error_type: 'invalid_email'
+            });
             return;
         }
         
@@ -99,7 +199,25 @@ if (contactForm) {
             this.reset();
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
+            
+            // Track successful form submission
+            trackEvent('form_submission_success', {
+                service_selected: data.service || 'none',
+                has_company: !!data.company,
+                message_length: data.message.length
+            });
         }, 2000);
+    });
+    
+    // Track form field interactions
+    const formFields = contactForm.querySelectorAll('input, select, textarea');
+    formFields.forEach(field => {
+        field.addEventListener('focus', () => {
+            trackEvent('form_field_focus', {
+                field_name: field.name || field.id,
+                field_type: field.type || field.tagName.toLowerCase()
+            });
+        });
     });
 }
 

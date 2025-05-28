@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Insights - Clean Implementation Examples</title>
+</head>
+<body>
+    <h1>Application Insights Implementation Options</h1>
+    
+    <!-- Option 1: Simple CDN (Recommended for static sites) -->
+    <h2>Option 1: Simple CDN</h2>
+    <pre><code>
+&lt;!-- In head section --&gt;
+&lt;script src="https://js.monitor.azure.com/scripts/b/ai.2.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    window.appInsights = new Microsoft.ApplicationInsights.ApplicationInsights({
+        config: {
+            instrumentationKey: 'YOUR_INSTRUMENTATION_KEY',
+            enableAutoRouteTracking: true,
+            disableFetchTracking: false,
+            enableCorsCorrelation: true
+        }
+    });
+    
+    appInsights.loadAppInsights();
+    appInsights.trackPageView();
+&lt;/script&gt;
+    </code></pre>
+    
+    <!-- Option 2: NPM Package (For build systems) -->
+    <h2>Option 2: NPM Package</h2>
+    <pre><code>
+// Install: npm install @microsoft/applicationinsights-web
+
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+
+const appInsights = new ApplicationInsights({
+    config: {
+        instrumentationKey: 'YOUR_INSTRUMENTATION_KEY',
+        enableAutoRouteTracking: true,
+        enableCorsCorrelation: true,
+        enableRequestHeaderTracking: true,
+        enableResponseHeaderTracking: true
+    }
+});
+
+appInsights.loadAppInsights();
+appInsights.trackPageView();
+
+// Export for use in other files
+export default appInsights;
+    </code></pre>
+    
+    <!-- Option 3: Advanced Configuration -->
+    <h2>Option 3: Advanced Configuration</h2>
+    <pre><code>
+&lt;script src="https://js.monitor.azure.com/scripts/b/ai.2.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    const appInsights = new Microsoft.ApplicationInsights.ApplicationInsights({
+        config: {
+            instrumentationKey: 'YOUR_INSTRUMENTATION_KEY',
+            
+            // Auto-tracking features
+            enableAutoRouteTracking: true,
+            enableCorsCorrelation: true,
+            enableRequestHeaderTracking: true,
+            enableResponseHeaderTracking: true,
+            
+            // Performance settings
+            disableFetchTracking: false,
+            enableAjaxErrorStatusText: true,
+            enableAjaxPerfTracking: true,
+            
+            // Privacy settings
+            cookieDomain: 'yourdomain.com',
+            isCookieUseDisabled: false,
+            
+            // Sampling (for high-traffic sites)
+            samplingPercentage: 100
+        }
+    });
+    
+    appInsights.loadAppInsights();
+    appInsights.trackPageView();
+    
+    // Custom tracking examples
+    appInsights.trackEvent({
+        name: 'custom_event',
+        properties: {
+            category: 'user_interaction',
+            action: 'button_click'
+        }
+    });
+&lt;/script&gt;
+    </code></pre>
+    
+    <h2>Usage in JavaScript</h2>
+    <pre><code>
+// Track custom events
+appInsights.trackEvent({
+    name: 'form_submission',
+    properties: {
+        form_type: 'contact',
+        success: true
+    }
+});
+
+// Track page views (if not auto-tracking)
+appInsights.trackPageView({
+    name: 'Custom Page Name',
+    uri: window.location.href
+});
+
+// Track exceptions
+try {
+    // Your code here
+} catch (error) {
+    appInsights.trackException({
+        exception: error,
+        properties: {
+            context: 'form_validation'
+        }
+    });
+}
+
+// Track metrics
+appInsights.trackMetric({
+    name: 'form_completion_time',
+    average: 45.2
+});
+    </code></pre>
+</body>
+</html> 
