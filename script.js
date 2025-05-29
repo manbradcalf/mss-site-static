@@ -10,18 +10,6 @@ function trackEvent(eventName, parameters = {}) {
         clarity('event', eventName);
     }
     
-    // Azure Application Insights
-    if (typeof appInsights !== 'undefined') {
-        appInsights.trackEvent({
-            name: eventName,
-            properties: {
-                ...parameters,
-                timestamp: new Date().toISOString(),
-                page: window.location.pathname
-            }
-        });
-    }
-    
     // Console log for debugging
     console.log('Analytics Event:', eventName, parameters);
 }
@@ -35,6 +23,7 @@ function trackSectionView(sectionName) {
 }
 
 // Enhanced Intersection Observer for section tracking
+// This is used to track which sections of the page are being viewed by the user.
 const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
