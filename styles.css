@@ -61,23 +61,23 @@ p {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1dbf73 0%, #16a05a 100%);
     color: white;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 10px 25px rgba(29, 191, 115, 0.3);
 }
 
 .btn-secondary {
     background: transparent;
-    color: #667eea;
-    border: 2px solid #667eea;
+    color: #1dbf73;
+    border: 2px solid #1dbf73;
 }
 
 .btn-secondary:hover {
-    background: #667eea;
+    background: #1dbf73;
     color: white;
     transform: translateY(-2px);
 }
@@ -116,7 +116,7 @@ p {
 }
 
 .nav-logo h2 {
-    color: #667eea;
+    color: #1dbf73;
     margin: 0;
     font-size: 1.8rem;
 }
@@ -135,7 +135,7 @@ p {
 }
 
 .nav-link:hover {
-    color: #667eea;
+    color: #1dbf73;
 }
 
 .hamburger {
@@ -198,8 +198,6 @@ p {
 .hero-graphic {
     width: 300px;
     height: 300px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -209,6 +207,12 @@ p {
 .hero-graphic i {
     font-size: 6rem;
     color: white;
+}
+
+.hero-logo {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
 }
 
 /* Section Headers */
@@ -257,7 +261,7 @@ p {
 .service-icon {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1dbf73 0%, #16a05a 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -309,7 +313,7 @@ p {
 }
 
 .package-card.featured {
-    border: 3px solid #667eea;
+    border: 3px solid #1dbf73;
     transform: scale(1.05);
 }
 
@@ -318,7 +322,7 @@ p {
     top: -15px;
     left: 50%;
     transform: translateX(-50%);
-    background: #667eea;
+    background: #1dbf73;
     color: white;
     padding: 8px 20px;
     border-radius: 20px;
@@ -337,7 +341,7 @@ p {
 
 .package-price .currency {
     font-size: 1.5rem;
-    color: #667eea;
+    color: #1dbf73;
     vertical-align: top;
 }
 
@@ -405,7 +409,7 @@ p {
 .portfolio-placeholder {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1dbf73 0%, #16a05a 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -491,7 +495,7 @@ p {
 .author-avatar {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1dbf73 0%, #16a05a 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -543,7 +547,7 @@ p {
 .contact-icon {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1dbf73 0%, #16a05a 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -592,7 +596,7 @@ p {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #1dbf73;
 }
 
 .form-group textarea {
@@ -640,7 +644,7 @@ p {
 }
 
 .footer-section ul li a:hover {
-    color: #667eea;
+    color: #1dbf73;
 }
 
 .social-links {
@@ -663,7 +667,7 @@ p {
 }
 
 .social-links a:hover {
-    background: #667eea;
+    background: #1dbf73;
 }
 
 .footer-bottom {
