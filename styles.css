@@ -972,6 +972,10 @@ p {
     padding: 2rem;
 }
 
+.coming-soon-section p {
+    color: #f8f9fa;
+}
+
 .coming-soon-content {
     max-width: 600px;
     margin: 0 auto;
