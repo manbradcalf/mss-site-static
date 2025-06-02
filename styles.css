@@ -904,7 +904,7 @@ p {
 }
 
 .blog-excerpt {
-    color: #666;
+    color: #f8f9fa;
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -918,7 +918,7 @@ p {
 
 .blog-tag {
     background: #f0f0f0;
-    color: #666;
+    color:#f8f9fa;
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -947,15 +947,125 @@ p {
 }
 
 .coming-soon h3 {
-    color: #333;
+    color: #f8f9fa;
     margin-bottom: 1rem;
 }
 
 .coming-soon p {
-    color: #666;
+    color: #f8f9fa;
     margin-bottom: 2rem;
 }
 
 .nav-link.active {
     color: #1dbf73;
+}
+
+/* Coming Soon Styles */
+.coming-soon-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1dbf73 0%, #009688 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+.coming-soon-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.coming-soon-icon {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.coming-soon-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #fff, #f0f0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.coming-soon-subtitle {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.coming-soon-description {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    opacity: 0.8;
+    line-height: 1.7;
+}
+
+.notify-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 1rem 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.notify-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.back-home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+}
+
+.back-home-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Mobile styles for coming soon section */
+@media (max-width: 768px) {
+    .coming-soon-title {
+        font-size: 2.5rem;
+    }
+    
+    .coming-soon-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .coming-soon-icon {
+        font-size: 3rem;
+    }
+
+    .notify-btn, .back-home-btn {
+        display: block;
+        margin: 0.5rem auto;
+        text-align: center;
+    }
 } 
